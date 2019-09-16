@@ -23,3 +23,15 @@ git clone https://github.com/matrix-io/matrix-lite-nfc-py
 ```
 
 TODO: Add steps to compile
+
+<!-- # Testing pybind11
+```
+git clone https://github.com/pybind/pybind11
+cd pybind11
+
+# compile examples
+mkdir build
+cd build
+cmake ..
+make check -j 4
+``` -->
