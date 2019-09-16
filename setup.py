@@ -93,7 +93,7 @@ class BuildExt(build_ext):
         build_ext.build_extensions(self)
 
 setup(
-    name='matrix-lite-nfc',
+    name='python_example',
     version=__version__,
     author='MATRIX Labs',
     author_email='',
