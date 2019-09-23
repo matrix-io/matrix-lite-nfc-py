@@ -8,6 +8,7 @@ __version__ = '0.0.1'
 
 class get_pybind_include(object):
     """Helper class to determine the pybind11 include path
+
     The purpose of this class is to postpone importing pybind11
     until it is actually installed, so that the ``get_include()``
     method can be invoked. """
@@ -22,7 +23,7 @@ class get_pybind_include(object):
 
 ext_modules = [
     Extension(
-        'python_example',
+        'matrix_lite_nfc',
         ['hal_nfc_wrapper/nfc.cpp'],
         include_dirs=[
             # Path to pybind11 headers
@@ -51,7 +52,11 @@ def has_flag(compiler, flagname):
 
 
 def cpp_flag(compiler):
-    flags = ['-std=c++11']
+    """Return the -std=c++[11/14/17] compiler flag.
+
+    The newer version is prefered over c++11 (when it is available).
+    """
+    flags = ['-std=c++17', '-std=c++14', '-std=c++11']
 
     for flag in flags:
         if has_flag(compiler, flag): return flag
@@ -93,16 +98,16 @@ class BuildExt(build_ext):
         build_ext.build_extensions(self)
 
 setup(
-    name='python_example',
+    name='matrix_lite_nfc',
     version=__version__,
-    author='MATRIX Labs',
-    author_email='',
-    url='https://github.com/matrix-io/matrix-lite-nfc-py',
+    author='Sylvain Corlay',
+    author_email='sylvain.corlay@gmail.com',
+    url='https://github.com/pybind/python_example',
     description='A test project using pybind11',
     long_description='',
     ext_modules=ext_modules,
-    install_requires=['pybind11>=2.3'],
-    setup_requires=['pybind11>=2.3'],
+    install_requires=['pybind11>=2.4'],
+    setup_requires=['pybind11>=2.4'],
     cmdclass={'build_ext': BuildExt},
     zip_safe=False,
 )

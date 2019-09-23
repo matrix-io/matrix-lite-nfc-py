@@ -26,6 +26,7 @@ TODO: Add steps to compile
 
 <!-- # Testing pybind11
 ```
+# manual
 git clone https://github.com/pybind/pybind11
 cd pybind11
 
@@ -34,4 +35,14 @@ mkdir build
 cd build
 cmake ..
 make check -j 4
-``` -->
+
+
+# setup.py (not finished yet)
+git clone https://github.com/matrix-io/matrix-hal-nfc
+# sudo python3 -m pip install pybind11
+# sudo python3 -m pip install setuptools
+sudo python3 -m pip install ./matrix-lite-nfc-py
+
+``` 
+
+-->
