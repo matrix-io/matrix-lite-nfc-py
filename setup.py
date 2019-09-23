@@ -23,7 +23,7 @@ class get_pybind_include(object):
 
 ext_modules = [
     Extension(
-        'matrix_lite_nfc',
+        'hal_nfc',
         ['hal_nfc_wrapper/nfc.cpp'],
         include_dirs=[
             # Path to pybind11 headers
@@ -100,9 +100,9 @@ class BuildExt(build_ext):
 setup(
     name='matrix_lite_nfc',
     version=__version__,
-    author='Sylvain Corlay',
-    author_email='sylvain.corlay@gmail.com',
-    url='https://github.com/pybind/python_example',
+    author='MATRIX',
+    packages=['matrix_lite_nfc',],
+    url='https://github.com/matrix-io/matrix-lite-nfc-py',
     description='A test project using pybind11',
     long_description='',
     ext_modules=ext_modules,

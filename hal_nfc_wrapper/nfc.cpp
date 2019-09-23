@@ -6,12 +6,12 @@ int add(int i, int j) {
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(matrix_lite_nfc, m) {
+PYBIND11_MODULE(hal_nfc, m) {
     m.doc() = R"pbdoc(
         Pybind11 example plugin
         -----------------------
 
-        .. currentmodule:: matrix_lite_nfc
+        .. currentmodule:: hal_nfc
 
         .. autosummary::
            :toctree: _generate
