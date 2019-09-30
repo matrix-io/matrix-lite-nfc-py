@@ -5,7 +5,6 @@ import setuptools
 
 __version__ = '0.0.1'
 
-
 class get_pybind_include(object):
     """Helper class to determine the pybind11 include path
 
@@ -26,9 +25,17 @@ ext_modules = [
         'hal_nfc',
         ['hal_nfc_wrapper/nfc.cpp'],
         include_dirs=[
-            # Path to pybind11 headers
             get_pybind_include(),
-            get_pybind_include(user=True)
+            get_pybind_include(user=True),
+            "/usr/local/include/matrix_nfc/nxp_nfc/NxpNfcRdLib/intfs",
+            "/usr/local/include/matrix_nfc/nxp_nfc/NxpNfcRdLib/types",
+        ],
+        extra_compile_args=[
+            "-lmatrix_hal_nfc"
+            "-std=c++11",
+            "-DNXPBUILD__PH_RASPBERRY_PI",
+            "-I/usr/local/include/matrix_nfc/nxp_nfc/NxpNfcRdLib/intfs",
+            "-I/usr/local/include/matrix_nfc/nxp_nfc/NxpNfcRdLib/types",
         ],
         language='c++'
     ),
@@ -85,6 +92,10 @@ class BuildExt(build_ext):
         ct = self.compiler.compiler_type
         opts = self.c_opts.get(ct, [])
         link_opts = self.l_opts.get(ct, [])
+
+        for arg in ext_modules[0].extra_compile_args: 
+            opts.append(arg)     
+
         if ct == 'unix':
             opts.append('-DVERSION_INFO="%s"' % self.distribution.get_version())
             opts.append(cpp_flag(self.compiler))
