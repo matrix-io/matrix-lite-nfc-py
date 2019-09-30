@@ -1,6 +1,6 @@
-import hal_nfc as hal
+# import hal_nfc as hal
 
 def add(x, y):
     return x+y
 
-add2 = hal.add
+# add2 = hal.add

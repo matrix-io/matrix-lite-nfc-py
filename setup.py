@@ -5,37 +5,18 @@ import setuptools
 
 __version__ = '0.0.1'
 
-class get_pybind_include(object):
-    """Helper class to determine the pybind11 include path
-
-    The purpose of this class is to postpone importing pybind11
-    until it is actually installed, so that the ``get_include()``
-    method can be invoked. """
-
-    def __init__(self, user=False):
-        self.user = user
-
-    def __str__(self):
-        import pybind11
-        return pybind11.get_include(self.user)
-
-
 ext_modules = [
     Extension(
         'hal_nfc',
         ['hal_nfc_wrapper/nfc.cpp'],
         include_dirs=[
-            get_pybind_include(),
-            get_pybind_include(user=True),
+            "/usr/local/include/python3.7",
             "/usr/local/include/matrix_nfc/nxp_nfc/NxpNfcRdLib/intfs",
             "/usr/local/include/matrix_nfc/nxp_nfc/NxpNfcRdLib/types",
         ],
+        libraries=["matrix_hal_nfc"],
         extra_compile_args=[
-            "-lmatrix_hal_nfc"
-            "-std=c++11",
             "-DNXPBUILD__PH_RASPBERRY_PI",
-            "-I/usr/local/include/matrix_nfc/nxp_nfc/NxpNfcRdLib/intfs",
-            "-I/usr/local/include/matrix_nfc/nxp_nfc/NxpNfcRdLib/types",
         ],
         language='c++'
     ),
@@ -63,7 +44,7 @@ def cpp_flag(compiler):
 
     The newer version is prefered over c++11 (when it is available).
     """
-    flags = ['-std=c++17', '-std=c++14', '-std=c++11']
+    flags = ['-std=c++11']
 
     for flag in flags:
         if has_flag(compiler, flag): return flag
