@@ -15,7 +15,10 @@ std::string status (int code) {
 namespace py = pybind11;
 PYBIND11_MODULE(hal_nfc, m) {
     m.doc() = R"pbdoc(Docs coming soon)pbdoc";
-    m.def("status", &status, R"pbdoc(add things)pbdoc");
+    m.def("status", &status);
+
+    init_reader(m);
+    // m.attr("num") = num;
 
 #ifdef VERSION_INFO
     m.attr("__version__") = VERSION_INFO;

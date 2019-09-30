@@ -8,7 +8,10 @@ __version__ = '0.0.1'
 ext_modules = [
     Extension(
         'hal_nfc',
-        ['hal_nfc_wrapper/nfc.cpp'],
+        sources=[
+            'hal_nfc_wrapper/reader/read.cpp',
+            'hal_nfc_wrapper/nfc.cpp',
+        ],
         include_dirs=[
             "/usr/local/include/python3.7",
             "/usr/local/include/matrix_nfc/nxp_nfc/NxpNfcRdLib/intfs",
