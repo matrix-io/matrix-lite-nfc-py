@@ -7,4 +7,4 @@ import hal_nfc as hal
 print(hal)
 print(hal.status(1024))
 print(hal.status(256))
-print("Read()", hal.read(1))
+print("Read()", hal.read({'info': True, 'pages': True}))
