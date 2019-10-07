@@ -1,19 +1,42 @@
-from setuptools import setup, Extension
+from setuptools import setup, Extension, find_packages
 from setuptools.command.build_ext import build_ext
 import sys
 import setuptools
+import os
 
 __version__ = '0.0.1'
 
+# Read contents of README file
+this_directory = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
+
+# Grabs all cppFiles in a folder
+def getCppFiles(folders):
+    files = []
+
+    for folder in folders:
+        for file in os.listdir(folder):
+            if file.endswith('.cpp') or file.endswith('.cxx'):
+                files.append(folder + '/' + file) 
+    return files
+
+# Find pybind11 header files
+class get_pybind_include(object):
+    def __init__(self, user=False):
+        self.user = user
+
+    def __str__(self):
+        import pybind11
+        return pybind11.get_include(self.user)
+
 ext_modules = [
     Extension(
-        'hal_nfc',
-        sources=[
-            'hal_nfc_wrapper/reader/read.cpp',
-            'hal_nfc_wrapper/nfc.cpp',
-        ],
+        '_hal_nfc',
+        sources=getCppFiles(['hal_nfc_wrapper', 'hal_nfc_wrapper/reader']),
         include_dirs=[
-            "/usr/local/include/python3.7",
+            get_pybind_include(),
+            get_pybind_include(user=True),
             "/usr/local/include/matrix_nfc/nxp_nfc/NxpNfcRdLib/intfs",
             "/usr/local/include/matrix_nfc/nxp_nfc/NxpNfcRdLib/types",
         ],
@@ -52,10 +75,11 @@ setup(
     name='matrix_lite_nfc',
     version=__version__,
     author='MATRIX',
-    packages=['matrix_lite_nfc',],
+    author_email='devel@matrixlabs.ai',
+    packages=find_packages(),
     url='https://github.com/matrix-io/matrix-lite-nfc-py',
     description='A test project using pybind11',
-    long_description='',
+    long_description=long_description,
     ext_modules=ext_modules,
     install_requires=['pybind11>=2.4'],
     setup_requires=['pybind11>=2.4'],

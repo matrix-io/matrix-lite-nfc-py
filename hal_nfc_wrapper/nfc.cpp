@@ -13,7 +13,7 @@ std::string status (int code) {
 
 // Exported Python module
 namespace py = pybind11;
-PYBIND11_MODULE(hal_nfc, m) {
+PYBIND11_MODULE(_hal_nfc, m) {
     m.doc() = R"pbdoc(Docs coming soon)pbdoc";
     m.def("status", &status);
 
