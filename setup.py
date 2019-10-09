@@ -17,7 +17,7 @@ def getCppFiles(folders):
 
     for folder in folders:
         for file in os.listdir(folder):
-            if file.endswith('.cpp') or file.endswith('.cxx'):
+            if file.endswith('.cpp'):
                 files.append(folder + '/' + file) 
     return files
 
@@ -32,17 +32,18 @@ class get_pybind_include(object):
 
 ext_modules = [
     Extension(
-        '_hal_nfc',
+        '_matrix_hal_nfc',
         sources=getCppFiles(['hal_nfc_wrapper', 'hal_nfc_wrapper/reader']),
         include_dirs=[
             get_pybind_include(),
             get_pybind_include(user=True),
-            "/usr/local/include/matrix_nfc/nxp_nfc/NxpNfcRdLib/intfs",
-            "/usr/local/include/matrix_nfc/nxp_nfc/NxpNfcRdLib/types",
+            '/usr/local/include/matrix_nfc/nxp_nfc/NxpNfcRdLib/intfs',
+            '/usr/local/include/matrix_nfc/nxp_nfc/NxpNfcRdLib/types',
         ],
-        libraries=["matrix_hal_nfc"],
+        libraries=['matrix_hal_nfc'],
         extra_compile_args=[
-            "-DNXPBUILD__PH_RASPBERRY_PI",
+            '-DNXPBUILD__PH_RASPBERRY_PI',
+            '-O3',
         ],
         language='c++'
     ),
@@ -85,4 +86,8 @@ setup(
     setup_requires=['pybind11>=2.4'],
     cmdclass={'build_ext': BuildExt},
     zip_safe=False,
+    classifiers=[
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.7',
+    ],
 )

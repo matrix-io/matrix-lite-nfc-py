@@ -1,4 +1,5 @@
 #include <pybind11/pybind11.h>
+#include <map>
 #include "./nfc.h"
 #include "./reader/read.h"
 
@@ -13,16 +14,39 @@ std::string status (int code) {
 
 // Exported Python module
 namespace py = pybind11;
-PYBIND11_MODULE(_hal_nfc, m) {
+PYBIND11_MODULE(_matrix_hal_nfc, m) {
     m.doc() = R"pbdoc(Docs coming soon)pbdoc";
     m.def("status", &status);
 
     init_reader(m);
-    // m.attr("num") = num;
+    // m.attr("num") = num; //* example attribute
 
 #ifdef VERSION_INFO
     m.attr("__version__") = VERSION_INFO;
 #else
     m.attr("__version__") = "dev";
 #endif
+}
+
+// Helper functions for pybind11
+namespace pyHelp {
+    // - Convert python String to lowercase c++ string
+    std::string to_lower_case(py::str py_str){
+        std::string str = py_str.cast<std::string>();
+
+        for(uint i=0;i<str.length();i++)
+            str.at(i)=std::tolower(str.at(i));
+
+        return str;
+    }
+
+    // - Return c++ map from python dictionary
+    std::map<std::string, pybind11::handle> dict_to_map(py::dict dict){
+        std::map<std::string, pybind11::handle> map;
+        
+        for (auto item : dict)
+            map[std::string(py::str(item.first))]=item.second;
+        
+        return map;
+    }
 }
