@@ -16,7 +16,7 @@ struct info_data {
     int bit_rate;
     int storage_size;
     bool updated;
-    // int status;
+    int read_status;
 
     std::string __str__;
 };

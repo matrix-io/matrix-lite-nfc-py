@@ -52,5 +52,9 @@ nfc_read_result reader::read_nfc(py::dict config) {
         nfc.Deactivate();
     }
 
-    return nfc_read_result();
+    // Add read status to final result
+    nfc_read_result result = nfc_read_result();
+    result.info.read_status = info_status;
+
+    return result;
 }

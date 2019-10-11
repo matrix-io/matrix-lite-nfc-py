@@ -16,7 +16,8 @@ void nfc_read_result_classes(py::module &m) {
         .def_readonly("IC_type", &info_data::IC_type)
         .def_readonly("bit_rate", &info_data::bit_rate)
         .def_readonly("storage_size", &info_data::storage_size)
-        .def_readonly("updated", &info_data::updated);
+        .def_readonly("updated", &info_data::updated)
+        .def_readonly("read_status", &info_data::read_status);
 
     // Object to hold all data
     py::class_<nfc_read_result>(m, "nfc_read_result")

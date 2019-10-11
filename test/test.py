@@ -11,5 +11,7 @@ while True:
     print(tag.info.UID)
     print(tag.info.updated)
     print(tag.info.technology)
+    print(tag.info.read_status)
+    print(hal.status(tag.info.read_status))
 
     sleep(0.3)
