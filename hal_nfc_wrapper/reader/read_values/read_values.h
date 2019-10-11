@@ -10,9 +10,10 @@ namespace py = pybind11;
 // Holds all nfc read data
 typedef struct nfc_read_result {
     nfc_read_result();
-    
+
     info_data info;
 
+    
 } nfc_read_result;
 
 void nfc_read_result_classes(py::module &);

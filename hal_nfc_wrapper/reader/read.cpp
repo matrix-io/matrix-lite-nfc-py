@@ -21,6 +21,11 @@ void init_reader(py::module &m) {
         .def("read_nfc", &reader::read_nfc);
 }
 
+// TODO:
+// 1. return void
+// 2. accept callback
+// 3. pass (nfc_read_result, nfc_status) to callback
+// 4. allow async
 nfc_read_result reader::read_nfc(py::dict config) {
     // Avoid reading, if NFC is being used by another thread
     if (!nfc_usage.try_lock()){
