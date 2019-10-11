@@ -1,12 +1,15 @@
 import _matrix_hal_nfc as hal
+from time import sleep
+
 print(hal)
-print(hal.__dir__())
-# print(hal.status(1024))
-# print(hal.status(256))
 
 reader = hal.read()
-tag = reader.read_nfc({'info': True})
 
-print(tag)
+while True:
+    tag = reader.read_nfc({'info': True})
 
-print(tag.info)
+    print(tag.info.UID)
+    print(tag.info.updated)
+    print(tag.info.technology)
+
+    sleep(0.3)
