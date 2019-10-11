@@ -1,11 +1,14 @@
-#ifndef READ_DATA_H
-#define READ_DATA_H
+#ifndef INFO_H
+#define INFO_H
 
 #include <pybind11/pybind11.h>
+#include "../../nfc.h"
 
 namespace py = pybind11;
 
 struct info_data {
+    info_data();
+
     std::string technology;
     std::string type;
     std::string UID;
@@ -15,19 +18,11 @@ struct info_data {
     std::string IC_type;
     int bit_rate;
     int storage_size;
-    bool updated;
-    int read_status;
 
-    std::string __str__;
+    int read_status;
+    std::string py__str__;
 };
 
-// Holds all nfc read data
-typedef struct nfc_read_result {
-    nfc_read_result();
-    info_data info;
-
-} nfc_read_result;
-
-void nfc_read_result_classes(py::module &);
+void nfc_info_values(py::module &);
 
 #endif

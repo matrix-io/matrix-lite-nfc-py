@@ -33,7 +33,11 @@ class get_pybind_include(object):
 ext_modules = [
     Extension(
         '_matrix_hal_nfc',
-        sources=getCppFiles(['hal_nfc_wrapper', 'hal_nfc_wrapper/reader']),
+        sources=getCppFiles([
+            'hal_nfc_wrapper', 
+            'hal_nfc_wrapper/reader',
+            'hal_nfc_wrapper/reader/read_values'
+        ]),
         include_dirs=[
             get_pybind_include(),
             get_pybind_include(user=True),

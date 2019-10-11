@@ -5,6 +5,7 @@
 
 matrix_hal::NFC nfc;
 matrix_hal::NFCData nfc_data;
+std::mutex nfc_usage;
 
 // Returns a string for the given status code.
 // given by: activate, read, & write functions

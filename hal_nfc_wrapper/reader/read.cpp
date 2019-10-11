@@ -2,7 +2,7 @@
 #include <pybind11/stl.h>
 #include <pybind11/functional.h>
 #include "./read.h"
-#include "./read_data.h"
+#include "./read_values/read_values.h"
 #include "../nfc.h"
 #include <iostream>
 #include <map>
@@ -22,6 +22,11 @@ void init_reader(py::module &m) {
 }
 
 nfc_read_result reader::read_nfc(py::dict config) {
+    // Avoid reading, if NFC is being used by another thread
+    if (!nfc_usage.try_lock()){
+      return nfc_read_result{}; // we avoid queuing since .read() will be in an endless loop
+    }
+
     int nfc_status, info_status, pages_status, ndef_status;
     std::vector<uint8_t> nfc_page;
 
@@ -52,9 +57,15 @@ nfc_read_result reader::read_nfc(py::dict config) {
         nfc.Deactivate();
     }
 
-    // Add read status to final result
+    // Append read status to final result
     nfc_read_result result = nfc_read_result();
     result.info.read_status = info_status;
+    // result.pages.read_status = pages_status; //Does not exist yet
+    // result.page.read_status = page_status;   //Does not exist yet
+    // result.ndef.read_status = ndef_status;   //Does not exist yet
+
+    // Allow other threads to use NFC
+    nfc_usage.unlock();
 
     return result;
 }
