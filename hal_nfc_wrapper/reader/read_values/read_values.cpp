@@ -5,13 +5,22 @@
 
 namespace py = pybind11;
 
-void nfc_read_result_classes(py::module &m) {
+void nfc_read_values(py::module &m) {
+    // Include NFC return values
     nfc_info_values(m);
+    //nfc_pages_values(m);
+    //nfc_page_values(m);
+    //nfc_ndef_values(m);
+
 
     // Object to hold all data
     py::class_<nfc_read_result>(m, "nfc_read_result")
         .def(py::init())
-        .def_readonly("info", &nfc_read_result::info);
+        .def_readonly("info", &nfc_read_result::info)
+        .def("__repr__", [](const nfc_read_result &result) {
+            return "TODO:";
+        }
+    );
 }
 
 // Populate read result with NFC read data

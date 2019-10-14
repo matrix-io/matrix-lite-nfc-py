@@ -1,15 +1,17 @@
 import _matrix_hal_nfc as hal
 from time import sleep
 
-print(hal)
+def read_nfc(code,tag):
+    print("nfc status:",code)
+    print(tag.info)
 
 reader = hal.read()
 
 while True:
-    tag = reader.read_nfc({'info': True})
+    reader.read_nfc({'info': True}, read_nfc)
 
-    print(tag.info)
-    print(hal.status(tag.info.read_status),"\n")
+    # print(tag.info)
+    # print(hal.status(tag.info.read_status),"\n")
     # print(hal.status(tag.info.read_status))
 
     sleep(4)

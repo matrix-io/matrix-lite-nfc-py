@@ -7,7 +7,7 @@ MATRIX Lite NFC Py is a package that allows users of varying skill levels to eas
 - [Android App](https://play.google.com/store/apps/details?id=com.nxp.nfc.tagwriter&hl=en_US)
 
 # Roadmap
-- [ ] Reading Info  (All tags)
+- [x] Reading Info  (All tags)
 - [ ] Reading Pages (MIFARE Ultralight & NTAG)
 - [ ] Writing Page  (MIFARE Ultralight & NTAG)
 - [ ] Reading NDEF  (MIFARE Ultralight & NTAG)
