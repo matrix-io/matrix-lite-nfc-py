@@ -15,10 +15,8 @@ class reader {
     public:
     reader(){};
 
-    // TODO:
-    // 2. accept callback
-    // 3. pass (nfc_read_result, nfc_status) to callback
-    // 4. allow async
+    // NFC read determines what to read & how fast.
+    // The results are passed to the callback given.
     void read_nfc(py::dict config, const std::function<void(int,nfc_read_result)> &callback) {
         // Avoid reading, if NFC is being used by another thread
         if (!nfc_usage.try_lock()){
@@ -31,6 +29,7 @@ class reader {
         auto options = pyHelp::dict_to_map(config);
 
         // Read requested data from NFC tag //
+        // Values are stored in a global nfc object.
         if (options["info"] && options["info"].cast<bool>()) {
             nfc_status = nfc.Activate();
             info_status = nfc.ReadInfo(&nfc_data.info);

@@ -1,17 +1,27 @@
-import _matrix_hal_nfc as hal
-from time import sleep
+# import _matrix_hal_nfc as hal
+# import matrix_lite_nfc as nfc
+from matrix_lite_nfc import read
+import time
+import asyncio
 
-def read_nfc(code,tag):
-    print("nfc status:",code)
-    print(tag.info)
+# print(nfc.read)
+print(read)
 
-reader = hal.read()
 
-while True:
-    reader.read_nfc({'info': True}, read_nfc)
 
-    # print(tag.info)
-    # print(hal.status(tag.info.read_status),"\n")
-    # print(hal.status(tag.info.read_status))
 
-    sleep(4)
+# def read_nfc(code,tag):
+#     print("nfc status:",code)
+#     print(tag.info)
+
+# def led_loop():
+#     everloop = [{}] * led.length
+#     everloop[0] = {'b':100}
+#     while True:
+#         print("led moving", everloop[0])
+#         everloop.append(everloop.pop(0))
+#         led.set(everloop)
+#         time.sleep(0.05)
+
+# start main
+# led_loop()
