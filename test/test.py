@@ -1,11 +1,21 @@
-# import _matrix_hal_nfc as hal
-# import matrix_lite_nfc as nfc
-from matrix_lite_nfc import read
+import _matrix_hal_nfc as hal
+# from matrix_lite_nfc import read
 import time
 import asyncio
 
 # print(nfc.read)
-print(read)
+reader = hal.read()
+
+def read_callback(code, tag):
+    print(code,hal.status(code))
+    print(tag.info)
+    print(tag.page)
+
+reader.read_nfc({
+    "rate": 1000,
+    "info": True,
+    "page": 0,
+},read_callback)
 
 
 

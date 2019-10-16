@@ -12,6 +12,7 @@ typedef struct nfc_read_result {
     nfc_read_result();
 
     info_data info;
+    std::vector<uint8_t> page;
  
 } nfc_read_result;
 

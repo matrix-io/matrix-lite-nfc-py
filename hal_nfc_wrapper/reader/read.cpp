@@ -57,11 +57,11 @@ class reader {
         // Populate results with last scanned NFC tag
         nfc_read_result result = nfc_read_result();
         
-        // Append read status to final result
+        // Add remaining values to result
         result.info.read_status = info_status;
-        // result.pages.read_status = pages_status; //Does not exist yet
-        // result.page.read_status = page_status;   //Does not exist yet
-        // result.ndef.read_status = ndef_status;   //Does not exist yet
+        // result.pages.read_status = pages_status;
+        result.page = nfc_page;
+        // result.ndef.read_status = ndef_status;
 
         // Allow other threads to use NFC
         nfc_usage.unlock();
