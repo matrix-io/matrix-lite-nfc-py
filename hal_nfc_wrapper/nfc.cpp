@@ -1,4 +1,5 @@
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
 #include <map>
 #include "./nfc.h"
 #include "./reader/read.h"
@@ -18,9 +19,9 @@ namespace py = pybind11;
 PYBIND11_MODULE(_matrix_hal_nfc, m) {
     m.doc() = R"pbdoc(Docs coming soon)pbdoc";
     m.def("status", &status);
+    // m.attr("num") = 12; //* example attribute
 
     init_reader(m);
-    // m.attr("num") = num; //* example attribute
 
 #ifdef VERSION_INFO
     m.attr("__version__") = VERSION_INFO;

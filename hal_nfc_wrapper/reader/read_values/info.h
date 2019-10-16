@@ -20,7 +20,6 @@ struct info_data {
     int storage_size;
 
     int read_status;
-    std::string py__str__;
 };
 
 void nfc_info_values(py::module &);

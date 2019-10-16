@@ -4,8 +4,8 @@
 
 namespace py = pybind11;
 
+// Python object for NFC Info
 void nfc_info_values(py::module &m) {
-    // Info
     py::class_<info_data>(m, "info_data")
         .def_readonly("technology", &info_data::technology)
         .def_readonly("type", &info_data::type)
@@ -35,8 +35,8 @@ void nfc_info_values(py::module &m) {
 
 // Populate with last scanned NFC tag
 info_data::info_data(){
-    // If new tag scanned, pass populated struct
-    if (nfc_data.info.recently_updated){
+    // If new tag scanned, give populated struct
+    if (nfc_data.info.recently_updated) {
         technology = nfc_data.info.technology;
         type = nfc_data.info.type;
         UID = nfc_data.info.UIDToHex().erase(0,2);
@@ -47,8 +47,8 @@ info_data::info_data(){
         bit_rate = nfc_data.info.bit_rate;
         storage_size = nfc_data.info.storage_size;
     }
-    // Else pass empty struct
-    else{
+    // Else give empty struct
+    else {
         technology = "";
         type = "";
         UID = "";

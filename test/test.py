@@ -8,12 +8,19 @@ reader = hal.read()
 
 def read_callback(code, tag):
     print(code,hal.status(code))
-    print(tag.info)
-    print(tag.page)
+    print("\n ***Info:",tag.info)
+    print("\n ***Page:", tag.page)
+
+    print("\n ***Pages:",tag.pages.read_status)
+    print("\n ***Pages:",tag.pages.read_complete)
+
+    if (tag.pages.read_complete == True):
+        print("TRUE")
 
 reader.read_nfc({
     "rate": 1000,
     "info": True,
+    "pages": True,
     "page": 0,
 },read_callback)
 

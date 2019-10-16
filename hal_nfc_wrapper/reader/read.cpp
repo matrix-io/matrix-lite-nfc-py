@@ -59,7 +59,7 @@ class reader {
         
         // Add remaining values to result
         result.info.read_status = info_status;
-        // result.pages.read_status = pages_status;
+        result.pages.read_status = pages_status;
         result.page = nfc_page;
         // result.ndef.read_status = ndef_status;
 
