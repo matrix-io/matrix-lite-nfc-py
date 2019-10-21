@@ -22,6 +22,7 @@ void nfc_read_values(py::module &m) {
         .def_readonly("pages", &nfc_read_result::pages)
         .def_readonly("page", &nfc_read_result::page)
         .def_readonly("ndef", &nfc_read_result::ndef)
+        .def_readonly("status", &nfc_read_result::status)
         .def("__repr__", [](const nfc_read_result &result) {
             return "TODO:";
         }

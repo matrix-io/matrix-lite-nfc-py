@@ -17,6 +17,7 @@ typedef struct nfc_read_result {
     pages_data           pages;
     std::vector<uint8_t> page;
     ndef_data            ndef;
+    int                  status;
  
 } nfc_read_result;
 

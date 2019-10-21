@@ -15,12 +15,11 @@ class reader {
     public:
     reader(){};
 
-    // NFC read determines what to read & how fast.
-    // The results are passed to the callback given.
-    void read_nfc(py::dict config, const std::function<void(int,nfc_read_result)> &callback) {
+    // Main logic for reading requested data from an NFC tag
+    nfc_read_result nfc_read(py::dict config){
         // Avoid reading, if NFC is being used by another thread
         if (!nfc_usage.try_lock()){
-        return; // we avoid queuing since .read() will be in an endless loop
+            return nfc_read_result{}; // we avoid queuing since .read() will be in an endless loop
         }
 
         int nfc_status, info_status, pages_status, ndef_status;
@@ -62,12 +61,22 @@ class reader {
         result.pages.read_status = pages_status;
         result.page = nfc_page;
         result.ndef.read_status = ndef_status;
+        result.status = nfc_status;
 
         // Allow other threads to use NFC
         nfc_usage.unlock();
 
-        // Pass results to python callback
-        callback(nfc_status, result);
+        return result;
+    }
+    
+    // - Read results are passed to the callback given (meant for async use).
+    void read_callback(py::dict config, const std::function<void(nfc_read_result)> &callback) {
+        callback(nfc_read(config));
+    }
+
+    // - Read results are directly given
+    nfc_read_result read_sync(py::dict config) {
+        return nfc_read(config);
     }
 };
 
@@ -78,5 +87,6 @@ void init_reader(py::module &m) {
 
     py::class_<reader>(m, "reader")
         .def(py::init())
-        .def("read", &reader::read_nfc);
+        .def("read", &reader::read_callback)
+        .def("scan", &reader::read_sync);
 }
