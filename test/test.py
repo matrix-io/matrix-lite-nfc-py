@@ -6,17 +6,18 @@ import asyncio
 # print(nfc.read)
 reader = hal.read()
 
+# Handle NFC data
 def read_callback(code, tag):
     print(code,hal.status(code))
     print("\n ***Info:",tag.info)
     print("\n ***Page:", tag.page)
 
-    print("\n ***Pages:",tag.pages.read_status)
-    print("\n ***Pages:",tag.pages.read_complete)
+    # print("\n ***Pages:",tag.pages.read_status)
+    # print("\n ***Pages:",tag.pages.read_complete)
+    # print("\n ***Content:",tag.pages.content)
+    print(tag.pages)
 
-    if (tag.pages.read_complete == True):
-        print("TRUE")
-
+# Start read loop
 reader.read_nfc({
     "rate": 1000,
     "info": True,

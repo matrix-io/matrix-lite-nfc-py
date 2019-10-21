@@ -29,8 +29,7 @@ void nfc_info_values(py::module &m) {
                 "\nbit_rate: "+std::to_string(info.bit_rate)+
                 "\nstorage_size: "+std::to_string(info.storage_size)+
                 "\nread_status: "+std::to_string(info.read_status);
-            }
-        );
+        });
 }
 
 // Populate with last scanned NFC tag
