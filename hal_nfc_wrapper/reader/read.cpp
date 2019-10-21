@@ -73,9 +73,10 @@ class reader {
 
 // **Exported NFC Reader class** //
 void init_reader(py::module &m) {
+    // Include class for nfc read data
     nfc_read_values(m);
 
-    py::class_<reader>(m, "read")
+    py::class_<reader>(m, "reader")
         .def(py::init())
-        .def("read_nfc", &reader::read_nfc);
+        .def("read", &reader::read_nfc);
 }

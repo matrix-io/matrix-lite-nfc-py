@@ -9,7 +9,7 @@
 namespace py = pybind11;
 
 void nfc_read_values(py::module &m) {
-    // Include NFC return values
+    // Include classes for nfc data
     nfc_info_values(m);
     nfc_pages_values(m);
     nfc_ndef_values(m);
