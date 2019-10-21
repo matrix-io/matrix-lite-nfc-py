@@ -18,9 +18,9 @@ void nfc_pages_values(py::module &m) {
             for ( std::vector<uint8_t> &page : nfc_data.pages.content ) {
                 printed_content += "[ ";
                 for ( int x : page ) printed_content.append(std::to_string(x)+", ");
-                printed_content.append("],\n");
+                printed_content.append("], ");
             }
-            printed_content = "]";
+            printed_content += "]";
 
             return 
                 "read_complete: "+std::to_string(pages.read_complete)+
