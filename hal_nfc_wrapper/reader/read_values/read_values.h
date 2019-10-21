@@ -5,17 +5,18 @@
 #include "./read_values.h"
 #include "./info.h"
 #include "./pages.h"
+#include "./ndef.h"
 
 namespace py = pybind11;
 
-// Holds all nfc read data
+// Represents all possible nfc read data
 typedef struct nfc_read_result {
     nfc_read_result();
 
     info_data            info;
     pages_data           pages;
     std::vector<uint8_t> page;
-    // ndef_data            ndef;
+    ndef_data            ndef;
  
 } nfc_read_result;
 

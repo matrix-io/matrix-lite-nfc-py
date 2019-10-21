@@ -3,6 +3,7 @@
 #include "./read_values.h"
 #include "./info.h"
 #include "./pages.h"
+#include "./ndef.h"
 #include "../../nfc.h"
 
 namespace py = pybind11;
@@ -11,7 +12,7 @@ void nfc_read_values(py::module &m) {
     // Include NFC return values
     nfc_info_values(m);
     nfc_pages_values(m);
-    //nfc_ndef_values(m);
+    nfc_ndef_values(m);
 
 
     // Object to hold all data
@@ -20,7 +21,7 @@ void nfc_read_values(py::module &m) {
         .def_readonly("info", &nfc_read_result::info)
         .def_readonly("pages", &nfc_read_result::pages)
         .def_readonly("page", &nfc_read_result::page)
-        // .def_readonly("ndef", &nfc_read_result::ndef)
+        .def_readonly("ndef", &nfc_read_result::ndef)
         .def("__repr__", [](const nfc_read_result &result) {
             return "TODO:";
         }
@@ -33,5 +34,5 @@ nfc_read_result::nfc_read_result(){
     // Populate struct with read data
     info = info_data();
     pages = pages_data();
-    // ndef = ndef_data();   // doesn't exist yet
+    ndef = ndef_data();
 }

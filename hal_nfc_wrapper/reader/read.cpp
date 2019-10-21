@@ -61,7 +61,7 @@ class reader {
         result.info.read_status = info_status;
         result.pages.read_status = pages_status;
         result.page = nfc_page;
-        // result.ndef.read_status = ndef_status;
+        result.ndef.read_status = ndef_status;
 
         // Allow other threads to use NFC
         nfc_usage.unlock();

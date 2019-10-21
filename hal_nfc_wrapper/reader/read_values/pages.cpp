@@ -1,12 +1,11 @@
 #include <pybind11/pybind11.h>
-#include "pages.h"
+#include "./pages.h"
 #include "../../nfc.h"
 
 namespace py = pybind11;
 
 // Python object for NFC Pages
 void nfc_pages_values(py::module &m) {
-    // Pages
     py::class_<pages_data>(m, "pages_data")
         .def_readonly("read_complete", &pages_data::read_complete)
         .def_readonly("content", &pages_data::content)
@@ -31,13 +30,13 @@ void nfc_pages_values(py::module &m) {
 
 // Populate with last scanned NFC tag
 pages_data::pages_data(){
-    // If new tag scanned, give populated struct
+    // If new tag scanned, populate struct
     if (nfc_data.pages.recently_updated) {
-        read_complete = nfc_data.pages.read_complete ? Py_True : Py_False; // ** Fix for C++ boolean conversion
+        read_complete = nfc_data.pages.read_complete;// ** Fix for C++ boolean conversion
         content = nfc_data.pages.content;
     }
-    // Else give empty struct
+    // Else set struct as empty
     else {
-        read_complete = Py_False;
+        read_complete = false;
     }
 }

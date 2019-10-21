@@ -9,19 +9,23 @@ reader = hal.read()
 # Handle NFC data
 def read_callback(code, tag):
     print(code,hal.status(code))
-    print("\n ***Info:",tag.info)
-    print("\n ***Page:", tag.page)
+    # print("\n ***Info:",tag.info)
+    # print("\n ***Page:", tag.page)
 
-    # print("\n ***Pages:",tag.pages.read_status)
-    # print("\n ***Pages:",tag.pages.read_complete)
-    # print("\n ***Content:",tag.pages.content)
-    print(tag.pages)
+    # print(tag.pages)
+
+    print("***valid:",tag.ndef.valid)
+    print("***content:",tag.ndef.content)
+    print("***status:",tag.ndef.read_status)
+
+    print("\n", tag.pages)
 
 # Start read loop
 reader.read_nfc({
     "rate": 1000,
     "info": True,
     "pages": True,
+    "ndef": True,
     "page": 0,
 },read_callback)
 

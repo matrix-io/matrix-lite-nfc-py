@@ -1,5 +1,5 @@
 #include <pybind11/pybind11.h>
-#include "info.h"
+#include "./info.h"
 #include "../../nfc.h"
 
 namespace py = pybind11;
