@@ -7,3 +7,4 @@ build
 tmp
 dist
 matrix_lite_nfc.*
+__pycache__

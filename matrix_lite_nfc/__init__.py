@@ -1,5 +1,7 @@
 import _matrix_hal_nfc as nfc
 __name__ = "matrix_lite_nfc"
-__all__ = ["read", "write"]
+__all__ = ["status", "read", "write"]
 
+# Exported variables
+status = nfc.status
 import matrix_lite_nfc.read as read
