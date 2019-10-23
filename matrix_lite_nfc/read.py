@@ -6,6 +6,8 @@ _nfc = nfc.reader()
 # Synchronous read function
 scan = _nfc.scan
 
+
+#TODO improve async implementation
 ##################################
 # Async Read Loop
 ##################################

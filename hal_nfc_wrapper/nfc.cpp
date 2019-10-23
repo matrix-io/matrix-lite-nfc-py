@@ -3,6 +3,7 @@
 #include <map>
 #include "./nfc.h"
 #include "./reader/read.h"
+#include "./ndef_types/ndef_parser.h"
 
 matrix_hal::NFC nfc;
 matrix_hal::NFCData nfc_data;
@@ -22,6 +23,7 @@ PYBIND11_MODULE(_matrix_hal_nfc, m) {
     // m.attr("num") = 12; //* example attribute
 
     init_reader(m);
+    init_ndef_parser(m);
 
 #ifdef VERSION_INFO
     m.attr("__version__") = VERSION_INFO;

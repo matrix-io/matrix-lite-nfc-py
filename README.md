@@ -10,7 +10,7 @@ MATRIX Lite NFC Py is a package that allows users of varying skill levels to eas
 - [x] Reading Info  (All tags)
 - [x] Reading Pages (MIFARE Ultralight & NTAG)
 - [ ] Writing Page  (MIFARE Ultralight & NTAG)
-- [ ] Reading NDEF  (MIFARE Ultralight & NTAG)
+- [x] Reading NDEF  (MIFARE Ultralight & NTAG)
 - [ ] Writing NDEF  (MIFARE Ultralight & NTAG)
 
 # Installation
