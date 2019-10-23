@@ -35,7 +35,13 @@ nfc.status(/*number*/)
 ### Synchronous Read
 A simple read that returns an object with tag data.
 ```py
-nfc.read.scan()
+nfc.read.scan({
+    # At least 1 read options is required. Less options -> faster reading!
+    "info": True,  # Generic information for any NFC tag
+    "pages": True, # All page data
+    "ndef": True,  # A single page(faster than pages)
+    "page": 0,     # All NDEF data
+})
 ```
 
 ### Starting Read Loop
@@ -51,11 +57,10 @@ def read_callback(tag):
 # Configure what you want to read
 nfc.read.start({
     "rate": 0.5, # Read loop speed (Seconds)
-    # At least 1 read options is required. Less options -> faster reading!
-    "info": True,  # Generic information for any NFC tag
-    "pages": True, # All page data
-    "ndef": True,  # A single page(faster than pages)
-    "page": 0,     # All NDEF data
+    "info": True,
+    "pages": True,
+    "ndef": True,
+    "page": 0,
 }, read_callback)
 ```
 
