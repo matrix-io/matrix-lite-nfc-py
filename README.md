@@ -30,7 +30,7 @@ nfc.status(/*number*/)
 ```
 
 ## nfc.read
-There can only be one instance of NFC reading. This is a hardware limitation that will not change.
+> There can only be one instance of NFC reading. This is a hardware limitation that will not change.
 
 ### Synchronous Read
 This is a straightforward read that returns an object with tag data.
