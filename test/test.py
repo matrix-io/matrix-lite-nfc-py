@@ -10,14 +10,14 @@ import asyncio
 # results = reader.scan({"rate": 1000,"info": True,"pages": True,"ndef": True,"page": 0,})
 
 msg = nfc.Message()
-msg.addEmptyRecord()
 msg.addTextRecord("Hello")
-msg.addTextRecord("Hola", "es")
-msg.addUriRecord("https://community.matrix.one")
-msg.addMimeMediaRecord("text/json", '{"answer": 42}')
+# msg.addTextRecord("Hola", "es")
+# msg.addUriRecord("https://community.matrix.one")
+# msg.addMimeMediaRecord("text/json", '{"answer": 42}')
 
 print(msg.__dir__())
 
-print(msg.toString())
+print(msg.toString(),'\n')
+
 print(msg.getRecordCount())
-print(msg.getEncodedSize())
+print(msg.getRecords())

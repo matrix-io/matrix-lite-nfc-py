@@ -2,6 +2,7 @@
 // #include <pybind11/functional.h>
 // #include <pybind11/stl.h>
 #include "./ndef_parser.h"
+#include "./ndef_record.h"
 #include "../nfc.h"
 #include "matrix_nfc/nfc.h"
 #include "matrix_nfc/nfc_data.h"
@@ -45,19 +46,53 @@ class ndef_parser {
         return parser.GetEncodedSize();
     }
 
+    ndef_record getRecord(int index) {
+        // Grab desired record
+        matrix_hal::NDEFRecord record = parser[index];
+        
+        // Create record data to return
+        ndef_record result;
+        result.tnf           = record.GetTnf();
+        result.type          = record.GetType();
+        result.payload       = record.GetPayload();
+        result.byteSize      = record.GetEncodedSize();
+        result.typeLength    = record.GetTypeLength();
+        result.payloadLength = record.GetPayloadLength();
+        result.IdLength      = record.GetIdLength();
+
+        return result;
+    }
+
+    // Return an array of ndef_records
+    ndef_record* getRecords() {
+        int records[parser.GetRecordCount()];
+
+        std::cout << "Record Count: " << parser.GetRecordCount() << std::endl;
+
+        for (int i = 0; i < parser.GetRecordCount(); i++){
+            std::cout << i << std::endl;
+        }
+
+        return records;
+    }
+
     private:
     matrix_hal::NDEFParser parser;
 };
 
 // **Exported NDEF Parser class** //
 void init_ndef_parser(py::module &m) {
+    record_data(m);
+
     py::class_<ndef_parser>(m, "Message")
         .def(py::init())
+        .def("getRecords", &ndef_parser::getRecords)
+        .def("getRecord", &ndef_parser::getRecord)
         .def("getEncodedSize", &ndef_parser::getEncodedSize)
         .def("getRecordCount", &ndef_parser::getRecordCount)
         .def("toString", &ndef_parser::toString)
         .def("addMimeMediaRecord", &ndef_parser::addMimeMediaRecord)
-        .def("addEmptyRecord", &ndef_parser::addEmptyRecord)
+        // Removed because it seems buggy // .def("addEmptyRecord", &ndef_parser::addEmptyRecord)
         .def("addUriRecord", &ndef_parser::addUriRecord)
         .def("addTextRecord", (void (ndef_parser::*)(std::string)) &ndef_parser::addTextRecord)
         .def("addTextRecord", (void (ndef_parser::*)(std::string, std::string)) &ndef_parser::addTextRecord);
