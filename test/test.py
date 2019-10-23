@@ -5,6 +5,7 @@ import asyncio
 
 ########################
 ## SIMPLE READ FUNC   ##
-reader = hal.reader()
+# reader = hal.reader()
 
 # results = reader.scan({"rate": 1000,"info": True,"pages": True,"ndef": True,"page": 0,})
+

@@ -34,7 +34,8 @@ ext_modules = [
     Extension(
         '_matrix_hal_nfc',
         sources=getCppFiles([
-            'hal_nfc_wrapper', 
+            'hal_nfc_wrapper',
+            'hal_nfc_wrapper/ndef_types',
             'hal_nfc_wrapper/reader',
             'hal_nfc_wrapper/reader/read_values'
         ]),
