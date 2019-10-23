@@ -68,14 +68,15 @@ class reader {
 
         return result;
     }
-    
-    // - Read results are passed to the callback given (meant for async use).
-    void read_callback(py::dict config, const std::function<void(nfc_read_result)> &callback) {
-        callback(nfc_read(config));
-    }
+
+    // * Not currently needed
+    // - Read results are passed to the callback given
+    // void read_callback(py::dict config, const std::function<void(nfc_read_result)> &callback) {
+    //     callback(nfc_read(config));
+    // }
 
     // - Read results are directly given
-    nfc_read_result read_sync(py::dict config) {
+    nfc_read_result read(py::dict config) {
         return nfc_read(config);
     }
 };
@@ -87,6 +88,6 @@ void init_reader(py::module &m) {
 
     py::class_<reader>(m, "reader")
         .def(py::init())
-        .def("read", &reader::read_callback)
-        .def("scan", &reader::read_sync);
+        // .def("read", &reader::read_callback)
+        .def("scan", &reader::read);
 }

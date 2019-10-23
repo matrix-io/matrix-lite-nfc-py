@@ -21,7 +21,7 @@ def _read_loop(options, callback):
     # Start read loop
     global _keep_alive
     while _keep_alive:
-        _nfc.read(options,callback)
+        callback(_nfc.scan(options))
         sleep(options["rate"])
 
 # Spawn a new read thread
