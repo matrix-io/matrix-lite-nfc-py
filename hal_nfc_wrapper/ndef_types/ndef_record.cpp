@@ -24,7 +24,6 @@ void record_data(py::module &m) {
             "\nbyteSize: "+      std::to_string(r.byteSize)+
             "\ntypeLength: "+    std::to_string(r.typeLength)+
             "\npayloadLength: "+ std::to_string(r.payloadLength)+
-            "\nIdLength: " +     std::to_string(r.IdLength);
-            ;
+            "\nIdLength: " +     std::to_string(r.IdLength)+"\n";
         });
 }

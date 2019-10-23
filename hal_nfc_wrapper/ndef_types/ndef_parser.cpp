@@ -1,12 +1,13 @@
 #include <pybind11/pybind11.h>
 // #include <pybind11/functional.h>
-// #include <pybind11/stl.h>
+#include <pybind11/stl.h>
 #include "./ndef_parser.h"
 #include "./ndef_record.h"
 #include "../nfc.h"
 #include "matrix_nfc/nfc.h"
 #include "matrix_nfc/nfc_data.h"
 #include <iostream>
+#include <list>
 
 class ndef_parser {
     public:
@@ -63,15 +64,11 @@ class ndef_parser {
         return result;
     }
 
-    // Return an array of ndef_records
-    ndef_record* getRecords() {
-        int records[parser.GetRecordCount()];
+    std::list<ndef_record> getRecords() {
+        std::list<ndef_record> records = {};
 
-        std::cout << "Record Count: " << parser.GetRecordCount() << std::endl;
-
-        for (int i = 0; i < parser.GetRecordCount(); i++){
-            std::cout << i << std::endl;
-        }
+        for (unsigned int i = 0; i < parser.GetRecordCount(); i++)
+            records.push_back(getRecord(i));
 
         return records;
     }
@@ -92,7 +89,7 @@ void init_ndef_parser(py::module &m) {
         .def("getRecordCount", &ndef_parser::getRecordCount)
         .def("toString", &ndef_parser::toString)
         .def("addMimeMediaRecord", &ndef_parser::addMimeMediaRecord)
-        // Removed because it seems buggy // .def("addEmptyRecord", &ndef_parser::addEmptyRecord)
+        // .def("addEmptyRecord", &ndef_parser::addEmptyRecord) // Removed because it seems buggy 
         .def("addUriRecord", &ndef_parser::addUriRecord)
         .def("addTextRecord", (void (ndef_parser::*)(std::string)) &ndef_parser::addTextRecord)
         .def("addTextRecord", (void (ndef_parser::*)(std::string, std::string)) &ndef_parser::addTextRecord);
