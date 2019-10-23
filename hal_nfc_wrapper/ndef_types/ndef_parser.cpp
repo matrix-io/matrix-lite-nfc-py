@@ -11,9 +11,19 @@
 
 class ndef_parser {
     public:
-    ndef_parser(){
+    ndef_parser() {
         parser = matrix_hal::NDEFParser();
-    };
+    }
+
+    ndef_parser(std::vector<uint8_t> content) {
+        // Create new NDEF content from user input
+        matrix_hal::NDEFContent ndef_content;
+        ndef_content.valid = true; // assume it's valid
+        ndef_content.content = content;
+
+        // Initialize ndef_parser with user's NDEF content
+        parser = matrix_hal::NDEFParser(&ndef_content);
+    }
 
     std::string toString() {
         return parser.ToString();
@@ -83,6 +93,7 @@ void init_ndef_parser(py::module &m) {
 
     py::class_<ndef_parser>(m, "Message")
         .def(py::init())
+        .def(py::init<std::vector<uint8_t>>())
         .def("getRecords", &ndef_parser::getRecords)
         .def("getRecord", &ndef_parser::getRecord)
         .def("getEncodedSize", &ndef_parser::getEncodedSize)
