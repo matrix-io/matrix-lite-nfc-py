@@ -33,13 +33,13 @@ nfc.status(/*number*/)
 > There can only be one instance of NFC reading. This is a hardware limitation that will not change.
 
 ### Synchronous Read
-This is a straightforward read that returns an object with tag data.
+A simple read that returns an object with tag data.
 ```py
 nfc.read.scan()
 ```
 
 ### Starting Read Loop
-This read is a non-blocking loop that passes tag data to a callback.
+A non-blocking loop that passes tag data to a callback.
 ```py
 def read_callback(tag):
     if(tag.status == 256):
