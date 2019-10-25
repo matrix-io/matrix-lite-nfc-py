@@ -12,7 +12,7 @@ void nfc_ndef_values(py::module &m) {
         .def_readonly("read_status", &ndef_data::read_status)
 
         .def("__repr__", [](const ndef_data &ndef) {
-            return "";
+            return "TODO: getRecords()";
         });
 }
 

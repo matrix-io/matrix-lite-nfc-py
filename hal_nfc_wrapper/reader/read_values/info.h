@@ -8,7 +8,7 @@ namespace py = pybind11;
 
 struct info_data {
     info_data();
-
+    std::string toString();
     std::string technology;
     std::string type;
     std::string UID;
@@ -18,7 +18,6 @@ struct info_data {
     std::string IC_type;
     int bit_rate;
     int storage_size;
-
     int read_status;
 };
 

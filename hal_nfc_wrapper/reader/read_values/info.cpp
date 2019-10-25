@@ -17,19 +17,7 @@ void nfc_info_values(py::module &m) {
         .def_readonly("bit_rate", &info_data::bit_rate)
         .def_readonly("storage_size", &info_data::storage_size)
         .def_readonly("read_status", &info_data::read_status)
-        .def("__repr__", [](const info_data &info) {
-            return
-                "technology: "+info.technology+
-                "\ntype: "+info.type+
-                "\nUID: "+info.UID+
-                "\nATQ: "+info.ATQ+
-                "\nSAK: "+info.SAK+
-                "\ncard_family: "+info.card_family+
-                "\nIC_type: "+info.IC_type+
-                "\nbit_rate: "+std::to_string(info.bit_rate)+
-                "\nstorage_size: "+std::to_string(info.storage_size)+
-                "\nread_status: "+std::to_string(info.read_status);
-        });
+        .def("__repr__", &info_data::toString);
 }
 
 // Populate with last scanned NFC tag
@@ -58,4 +46,18 @@ info_data::info_data(){
         bit_rate = 0;
         storage_size = 0;
     }
+}
+
+std::string info_data::toString(){
+    return
+        "technology: "+technology+
+        "\ntype: "+type+
+        "\nUID: "+UID+
+        "\nATQ: "+ATQ+
+        "\nSAK: "+SAK+
+        "\ncard_family: "+card_family+
+        "\nIC_type: "+IC_type+
+        "\nbit_rate: "+std::to_string(bit_rate)+
+        "\nstorage_size: "+std::to_string(storage_size)+
+        "\nread_status: "+std::to_string(read_status);
 }

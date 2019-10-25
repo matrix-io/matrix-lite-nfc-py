@@ -24,7 +24,19 @@ void nfc_read_values(py::module &m) {
         .def_readonly("ndef", &nfc_read_result::ndef)
         .def_readonly("status", &nfc_read_result::status)
         .def("__repr__", [](const nfc_read_result &result) {
-            return "TODO:";
+            std::string print = "";
+
+            if (result.info.read_status == 0)
+                return result.info.toString();
+                // print.append("{\n info: "+result.info.toString()+"\n}");
+            if (result.pages.read_status == 0)
+                return result.pages.toString();
+                // print.append("{\n pages: "+result.pages.toString()+"\n}");
+
+            // TODO page
+            // TODO ndef
+
+            return print;
         }
     );
 }
