@@ -12,7 +12,6 @@ MATRIX Lite NFC Py is a package that allows users of varying skill levels to eas
 - [x] Writing Page  (MIFARE Ultralight & NTAG)
 - [x] Reading NDEF  (MIFARE Ultralight & NTAG)
 - [x] Writing NDEF  (MIFARE Ultralight & NTAG)
-- [ ] Finish class printing
 - [ ] Docker deployment to PyPi
 
 # Installation
@@ -104,7 +103,7 @@ Writing to an NFC tag should normally be done inside the read loop.
 ### Writing an NDEF message
 ```py
 # Create new message
-msg = nfc.Message
+msg = nfc.Message()
 msg.addUriRecord("https://community.matrix.one")
 
 # Write and then Print status codes for activation & writing

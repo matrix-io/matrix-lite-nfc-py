@@ -55,7 +55,6 @@ int ndef_parser::getEncodedSize() {
     return parser.GetEncodedSize();
 }
 
-// Getter for ndef_parser
 matrix_hal::NDEFParser* ndef_parser::getParser(){
     return &parser;
 }

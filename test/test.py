@@ -14,17 +14,4 @@ print(msg)
 print(msg.getRecords())
 
 
-msg = nfc.Message()
-# msg.addTextRecord("Hello")
-# msg.addTextRecord("Hola", "es")
-msg.addUriRecord("https://store.matrix.one")
-# msg.addMimeMediaRecord("text/json", '{"answer": 42}')
-
-# print(msg.__dir__())
-# print(msg.toString(),'\n')
-# print(msg.getRecordCount(),"\n*")
-
-# print(write.page(40, [65,65,65,65]))
-print(write.message(msg))
-time.sleep(1)
-print(reader.scan({"page": 40}).page)
+print(nfc.write.erase())

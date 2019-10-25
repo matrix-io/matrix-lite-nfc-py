@@ -26,8 +26,7 @@ class ndef_parser {
     int getEncodedSize();
     ndef_record getRecord(int index);
     std::list<ndef_record> getRecords();
-    
-    // C++ Getters
+
     matrix_hal::NDEFParser* getParser();
 };
 
