@@ -6,10 +6,12 @@ import asyncio
 ########################
 ##  SIMPLE READ FUNC  ##
 reader = nfc.reader()
+write = nfc.writer()
 
 results = reader.scan({"ndef": True})
 msg = nfc.Message(results.ndef.content)
 print(msg)
+print(msg.getRecords())
 
 
 # msg = nfc.Message()
@@ -22,6 +24,6 @@ print(msg)
 # print(msg.toString(),'\n')
 # print(msg.getRecordCount(),"\n*")
 
-
-
-print(msg.getRecords())
+print(write.page(40, [65,65,65,65]))
+time.sleep(1)
+print(reader.scan({"page": 40}).page)
