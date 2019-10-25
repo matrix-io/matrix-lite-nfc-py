@@ -36,6 +36,7 @@ ext_modules = [
         sources=getCppFiles([
             'hal_nfc_wrapper',
             'hal_nfc_wrapper/ndef_types',
+            'hal_nfc_wrapper/writer',
             'hal_nfc_wrapper/reader',
             'hal_nfc_wrapper/reader/read_values'
         ]),

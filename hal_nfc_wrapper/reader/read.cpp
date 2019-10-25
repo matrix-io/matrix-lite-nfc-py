@@ -79,8 +79,8 @@ class reader {
     nfc_read_result read(py::dict config) {
         py::gil_scoped_release release;
         auto result = nfc_read(config);
+        
         py::gil_scoped_acquire acquire;
-
         return result;
     }
 };
@@ -92,6 +92,6 @@ void init_reader(py::module &m) {
 
     py::class_<reader>(m, "reader")
         .def(py::init())
-        // .def("read", &reader::read_callback)
+        // .def("read", &reader::read_callback) // Currently unused
         .def("scan", &reader::read);
 }
