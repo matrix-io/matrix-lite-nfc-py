@@ -9,9 +9,11 @@ MATRIX Lite NFC Py is a package that allows users of varying skill levels to eas
 # Roadmap
 - [x] Reading Info  (All tags)
 - [x] Reading Pages (MIFARE Ultralight & NTAG)
-- [ ] Writing Page  (MIFARE Ultralight & NTAG)
+- [x] Writing Page  (MIFARE Ultralight & NTAG)
 - [x] Reading NDEF  (MIFARE Ultralight & NTAG)
-- [ ] Writing NDEF  (MIFARE Ultralight & NTAG)
+- [x] Writing NDEF  (MIFARE Ultralight & NTAG)
+- [ ] Finish class printing
+- [ ] Docker deployment to PyPi
 
 # Installation
 1. Install [matrix-hal-nfc](https://github.com/matrix-io/matrix-hal-nfc) to use this library.
@@ -69,6 +71,58 @@ nfc.read.start({
 nfc.read.stop()
 ```
 
+## nfc.Message
+
+### 1. Creating a new NDEF Message 
+```py
+# Create an empty NDEF message
+msg = nfc.Message()
+
+# Add NDEF Records to message
+msg.addUriRecord("https://community.matrix.one")
+msg.addUriRecord("tel:+14085551212")
+msg.addTextRecord("Hello World")
+msg.addTextRecord("Hola Mundo", "es")
+msg.addMimeMediaRecord("text/json", '{"answer": 42}')
+
+# You then pass msg into nfc.write.message(msg)
+```
+
+### 2. Reading a new NDEF Message 
+```py
+# Get NDEF data from scanned tag
+tag = nfc.read.scan({"ndef": True})
+
+# Create & print NDEF message
+msg = nfc.Message(tag.ndef.content)
+print(msg.getRecords())
+```
+
+## nfc.write
+Writing to an NFC tag should normally be done inside the read loop.
+
+### Writing an NDEF message
+```py
+# Create new message
+msg = nfc.Message
+msg.addUriRecord("https://community.matrix.one")
+
+# Write and then Print status codes for activation & writing
+print(nfc.write.message(msg))
+```
+
+### Erasing an NDEF message
+```py
+print(nfc.write.erase())
+```
+
+### Writing to a tag's page (WARNING)
+Be careful when writing to a page. You can accidentally lock your NFC tag!
+```py
+# arg1: page you want to overwrite
+# arg2: Array of numbers that represents a byte
+print(nfc.write.page(25, [48,45,59,21]))
+```
 
 # Building Locally For Development
 Download the repository.

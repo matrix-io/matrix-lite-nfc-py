@@ -5,4 +5,5 @@ __all__ = ["status", "read", "write"]
 # Exported variables
 status = nfc.status
 Message = nfc.Message
+write = nfc.writer()
 import matrix_lite_nfc.read as read

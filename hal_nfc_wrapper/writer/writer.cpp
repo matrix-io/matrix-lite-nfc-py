@@ -37,7 +37,7 @@ class writer {
     nfc_write_result erase(){
         py::gil_scoped_release release;
 
-        // Erase all NDEF messages
+        // Erase NDEF message
         nfc_usage.lock();
         int nfc_status = nfc.Activate();
         int erase_status = nfc.ndef.Erase();
@@ -48,8 +48,19 @@ class writer {
         return nfc_write_result {nfc_status, erase_status};
     }
 
-    // void message(ndef msg){}
-    
+    nfc_write_result message(ndef_parser message){
+        py::gil_scoped_release release;
+
+        // Write NDEF message
+        nfc_usage.lock();
+        int nfc_status = nfc.Activate();
+        int ndef_status = nfc.ndef.Write(message.getParser());
+        nfc.Deactivate();
+        nfc_usage.unlock();
+
+        py::gil_scoped_acquire acquire;
+        return nfc_write_result {nfc_status, ndef_status};
+    }
 };
 
 // **Exported NFC Writer classes** //
@@ -66,7 +77,7 @@ void init_writer(py::module &m) {
 
     py::class_<writer>(m, "writer")
         .def(py::init())
-        // .def("message", &writer::message)
+        .def("page", &writer::page)
         .def("erase", &writer::erase)
-        .def("page", &writer::page);
+        .def("message", &writer::message);
 }
