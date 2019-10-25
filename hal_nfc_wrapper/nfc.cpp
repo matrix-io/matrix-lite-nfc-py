@@ -3,6 +3,7 @@
 #include <map>
 #include "./nfc.h"
 #include "./reader/read.h"
+#include "./writer/write.h"
 #include "./ndef_types/ndef_parser.h"
 
 matrix_hal::NFC nfc;
@@ -20,9 +21,9 @@ namespace py = pybind11;
 PYBIND11_MODULE(_matrix_hal_nfc, m) {
     m.doc() = R"pbdoc(Docs coming soon)pbdoc";
     m.def("status", &status);
-    // m.attr("num") = 12; //* example attribute
 
     init_reader(m);
+    init_writer(m);
     init_ndef_parser(m);
 
 #ifdef VERSION_INFO

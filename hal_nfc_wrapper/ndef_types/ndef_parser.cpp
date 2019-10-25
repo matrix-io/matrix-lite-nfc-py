@@ -9,83 +9,81 @@
 #include <iostream>
 #include <list>
 
-class ndef_parser {
-    public:
-    ndef_parser() {
-        parser = matrix_hal::NDEFParser();
-    }
+ndef_parser::ndef_parser() {
+    parser = matrix_hal::NDEFParser();
+}
 
-    ndef_parser(std::vector<uint8_t> content) {
-        // Create new NDEF content from user input
-        matrix_hal::NDEFContent ndef_content;
-        ndef_content.valid = true; // assume it's valid
-        ndef_content.content = content;
+ndef_parser::ndef_parser(std::vector<uint8_t> content) {
+    // Create new NDEF content from user input
+    matrix_hal::NDEFContent ndef_content;
+    ndef_content.valid = true; // assume it's valid
+    ndef_content.content = content;
 
-        // Initialize ndef_parser with user's NDEF content
-        parser = matrix_hal::NDEFParser(&ndef_content);
-    }
+    // Initialize ndef_parser with user's NDEF content
+    parser = matrix_hal::NDEFParser(&ndef_content);
+}
 
-    std::string toString() {
-        return parser.ToString();
-    }
+std::string ndef_parser::toString() {
+    return parser.ToString();
+}
 
-    void addTextRecord(std::string text) {
-        parser.AddTextRecord(text);
-    }
+void ndef_parser::addTextRecord(std::string text) {
+    parser.AddTextRecord(text);
+}
 
-    void addTextRecord(std::string text, std::string lang) {
-        parser.AddTextRecord(text, lang);
-    }
+void ndef_parser::addTextRecord(std::string text, std::string lang) {
+    parser.AddTextRecord(text, lang);
+}
 
-    void addUriRecord(std::string text) {
-        parser.AddTextRecord(text);
-    }
+void ndef_parser::addUriRecord(std::string text) {
+    parser.AddTextRecord(text);
+}
 
-    void addEmptyRecord() {
-        parser.AddEmptyRecord();
-    }
+void ndef_parser::addEmptyRecord() {
+    parser.AddEmptyRecord();
+}
 
-    void addMimeMediaRecord(std::string mimeType, std::string payload) {
-        parser.AddMimeMediaRecord(mimeType, payload);
-    }
+void ndef_parser::addMimeMediaRecord(std::string mimeType, std::string payload) {
+    parser.AddMimeMediaRecord(mimeType, payload);
+}
 
-    int getRecordCount() {
-        return parser.GetRecordCount();
-    }
+int ndef_parser::getRecordCount() {
+    return parser.GetRecordCount();
+}
 
-    int getEncodedSize() {
-        return parser.GetEncodedSize();
-    }
+int ndef_parser::getEncodedSize() {
+    return parser.GetEncodedSize();
+}
 
-    ndef_record getRecord(int index) {
-        // Grab desired record
-        matrix_hal::NDEFRecord record = parser[index];
-        
-        // Create record data to return
-        ndef_record result;
-        result.tnf           = record.GetTnf();
-        result.type          = record.GetType();
-        result.payload       = record.GetPayload();
-        result.byteSize      = record.GetEncodedSize();
-        result.typeLength    = record.GetTypeLength();
-        result.payloadLength = record.GetPayloadLength();
-        result.IdLength      = record.GetIdLength();
+matrix_hal::NDEFParser* ndef_parser::getParser(){
+    return &parser;
+}
 
-        return result;
-    }
+ndef_record ndef_parser::getRecord(int index) {
+    // Grab desired record
+    matrix_hal::NDEFRecord record = parser[index];
+    
+    // Create record data to return
+    ndef_record result;
+    result.tnf           = record.GetTnf();
+    result.type          = record.GetType();
+    result.payload       = record.GetPayload();
+    result.byteSize      = record.GetEncodedSize();
+    result.typeLength    = record.GetTypeLength();
+    result.payloadLength = record.GetPayloadLength();
+    result.IdLength      = record.GetIdLength();
 
-    std::list<ndef_record> getRecords() {
-        std::list<ndef_record> records = {};
+    return result;
+}
 
-        for (unsigned int i = 0; i < parser.GetRecordCount(); i++)
-            records.push_back(getRecord(i));
+std::list<ndef_record> ndef_parser::getRecords() {
+    std::list<ndef_record> records = {};
 
-        return records;
-    }
+    for (unsigned int i = 0; i < parser.GetRecordCount(); i++)
+        records.push_back(getRecord(i));
 
-    private:
-    matrix_hal::NDEFParser parser;
-};
+    return records;
+}
 
 // **Exported NDEF Parser class** //
 void init_ndef_parser(py::module &m) {
