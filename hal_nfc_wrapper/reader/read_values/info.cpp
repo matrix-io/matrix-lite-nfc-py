@@ -48,7 +48,7 @@ info_data::info_data(){
     }
 }
 
-std::string info_data::toString(){
+std::string info_data::toString() {
     return
         "technology: "+technology+
         "\ntype: "+type+

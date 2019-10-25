@@ -27,11 +27,9 @@ void nfc_read_values(py::module &m) {
             std::string print = "";
 
             if (result.info.read_status == 0)
-                return result.info.toString();
-                // print.append("{\n info: "+result.info.toString()+"\n}");
+                print.append("{\n info: "+result.info.toString()+"\n}");
             if (result.pages.read_status == 0)
-                return result.pages.toString();
-                // print.append("{\n pages: "+result.pages.toString()+"\n}");
+                print.append("{\n pages: "+result.pages.toString()+"\n}");
 
             // TODO page
             // TODO ndef
