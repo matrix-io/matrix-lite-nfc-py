@@ -77,7 +77,11 @@ class reader {
 
     // - Read results are directly given
     nfc_read_result read(py::dict config) {
-        return nfc_read(config);
+        py::gil_scoped_release release;
+        auto result = nfc_read(config);
+        py::gil_scoped_acquire acquire;
+
+        return result;
     }
 };
 
