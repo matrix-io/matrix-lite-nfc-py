@@ -8,4 +8,4 @@ import asyncio
 reader = nfc.reader()
 write = nfc.writer()
 
-print(reader.scan({"info": True}).info)
+print(reader.scan({"info": True, "page": 25}))

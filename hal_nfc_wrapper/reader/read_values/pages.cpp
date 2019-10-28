@@ -14,7 +14,7 @@ void nfc_pages_values(py::module &m) {
 }
 
 // Populate with last scanned NFC tag
-pages_data::pages_data(){
+pages_data::pages_data() {
     // If new tag scanned, populate struct
     if (nfc_data.pages.recently_updated) {
         read_complete = nfc_data.pages.read_complete;// ** Fix for C++ boolean conversion
@@ -26,7 +26,7 @@ pages_data::pages_data(){
     }
 }
 
-pages_data::toString(){
+std::string pages_data::toString() const {
     // Create string from 2D vector
     std::string printed_content = "[\n";
     for ( std::vector<uint8_t> &page : nfc_data.pages.content ) {
@@ -36,8 +36,9 @@ pages_data::toString(){
     }
     printed_content += "]";
 
-    return 
-        "read_complete: "+std::to_string(read_complete)+
-        "\ncontent: "+printed_content+
-        "\nread_status: "+std::to_string(read_status);
+    return
+        "pages {\n\tread_complete: "+std::to_string(read_complete)+
+        "\n\tcontent: "+printed_content+
+        "\n\tread_status: "+std::to_string(read_status)+
+    "\n}\n";
 }

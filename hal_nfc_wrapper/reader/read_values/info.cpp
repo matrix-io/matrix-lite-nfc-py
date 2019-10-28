@@ -21,7 +21,7 @@ void nfc_info_values(py::module &m) {
 }
 
 // Populate with last scanned NFC tag
-info_data::info_data(){
+info_data::info_data() {
     // If new tag scanned, give populated struct
     if (nfc_data.info.recently_updated) {
         technology = nfc_data.info.technology;
@@ -48,16 +48,17 @@ info_data::info_data(){
     }
 }
 
-std::string info_data::toString() {
+std::string info_data::toString() const {
     return
-        "technology: "+technology+
-        "\ntype: "+type+
-        "\nUID: "+UID+
-        "\nATQ: "+ATQ+
-        "\nSAK: "+SAK+
-        "\ncard_family: "+card_family+
-        "\nIC_type: "+IC_type+
-        "\nbit_rate: "+std::to_string(bit_rate)+
-        "\nstorage_size: "+std::to_string(storage_size)+
-        "\nread_status: "+std::to_string(read_status);
+        "info {\n\ttechnology: "+technology+
+        "\n\ttype: "+type+
+        "\n\tUID: "+UID+
+        "\n\tATQ: "+ATQ+
+        "\n\tSAK: "+SAK+
+        "\n\tcard_family: "+card_family+
+        "\n\tIC_type: "+IC_type+
+        "\n\tbit_rate: "+std::to_string(bit_rate)+
+        "\n\tstorage_size: "+std::to_string(storage_size)+
+        "\n\tread_status: "+std::to_string(read_status)+
+    "\n}\n";
 }

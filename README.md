@@ -129,7 +129,12 @@ Download the repository.
 git clone https://github.com/matrix-io/matrix-lite-nfc-py
 ```
 
-Compile and install library
+Install pybind11.
+```
+sudo python3 -m pip install pybind11
+```
+
+Compile and install library.
 ```
 sudo python3 -m pip install ./matrix-lite-nfc-py
 ```
