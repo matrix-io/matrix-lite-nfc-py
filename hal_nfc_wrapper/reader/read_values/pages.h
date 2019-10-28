@@ -9,6 +9,7 @@ namespace py = pybind11;
 
 struct pages_data {
     pages_data();
+    std::string toString() const;
     bool read_complete;
     int read_status;
     std::vector<std::vector<uint8_t>> content;

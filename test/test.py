@@ -8,10 +8,5 @@ import asyncio
 reader = nfc.reader()
 write = nfc.writer()
 
-results = reader.scan({"ndef": True})
-msg = nfc.Message(results.ndef.content)
-print(msg)
-print(msg.getRecords())
-
-
-print(nfc.write.erase())
+print(reader.scan({"info": True,"ndef": True, "pages": True}))
+# print(reader.scan({"info": True, "page": 25, "ndef":True}).ndef)

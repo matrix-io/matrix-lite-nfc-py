@@ -9,6 +9,7 @@ namespace py = pybind11;
 
 struct ndef_data {
     ndef_data();
+    std::string toString() const;
     bool valid;
     std::vector<uint8_t> content;
     int read_status;
