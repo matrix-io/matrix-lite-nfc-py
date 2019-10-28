@@ -10,10 +10,7 @@ void nfc_ndef_values(py::module &m) {
         .def_readonly("valid", &ndef_data::valid)
         .def_readonly("content", &ndef_data::content)
         .def_readonly("read_status", &ndef_data::read_status)
-
-        .def("__repr__", [](const ndef_data &ndef) {
-            return "TODO: getRecords()";
-        });
+        .def("__repr__", &ndef_data::toString);
 }
 
 // Populate with last scanned NFC tag
@@ -27,4 +24,18 @@ ndef_data::ndef_data(){
     else {
         valid = false;
     }
+}
+
+std::string ndef_data::toString() const {
+    std::string printed_content = "[ ";
+
+    // Create string from vector
+    for ( uint8_t &byte : nfc_data.ndef.content )
+        printed_content.append(std::to_string(byte)+", ");
+    
+    return
+        "ndef {\n\tvalid: "+std::to_string(valid)+
+        "\n\tcontent: "+printed_content+" ]"+
+        "\n\tread_status: "+std::to_string(read_status)+
+        "\n}\n";
 }

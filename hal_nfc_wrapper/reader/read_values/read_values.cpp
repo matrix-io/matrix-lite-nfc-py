@@ -49,7 +49,10 @@ void nfc_read_values(py::module &m) {
                 print.append("page []\n");
 
             // ndef
-            // TODO ndef
+            if (result.ndef.read_status == 0)
+                print.append(result.ndef.toString());
+            else
+                print.append("ndef {}\n");
 
             return print+"}\n";
         }
