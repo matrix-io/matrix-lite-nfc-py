@@ -9,16 +9,16 @@ curl https://apt.matrix.one/doc/apt-key.gpg | sudo apt-key add -
 echo "deb https://apt.matrix.one/raspbian stretch main" | sudo tee /etc/apt/sources.list.d/matrixlabs.list
 
 # Raspberry Pi Dependencies
-sudo apt-get install -y apt-transport-https systemd
+sudo apt-get install -y apt-transport-https systemd cmake g++ git unzip
 sudo apt-get update
 
 # MATRIX Dependencies
-sudo apt-get install -y cmake g++ git matrixio-creator-init libmatrixio-creator-hal libmatrixio-creator-hal-dev
+sudo apt-get install -y matrixio-creator-init libmatrixio-creator-hal libmatrixio-creator-hal-dev
 
 
 # Install MATRIX HAL NFC
 git clone https://github.com/matrix-io/matrix-hal-nfc.git
-cd matrix-hal-nfc && mv /volume/SW297940.zip ./
+cd matrix-hal-nfc && cp /volume/SW297940.zip ./
 ./install_nxp.sh && ./build.sh
 cd .. && rm -r matrix-hal-nfc
 
