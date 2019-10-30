@@ -14,7 +14,7 @@ branches:
 
 before_install:
   # cancel build if release not tagged
-  - if [ ! -n "$TRAVIS_TAG" ]; then exit 0; fi
+  # - if [ ! -n "$TRAVIS_TAG" ]; then exit 0; fi
 
   # prepare qemu
   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
@@ -41,4 +41,4 @@ install:
 # upload all pypi packages
 script:
   - ls ~/pypi_packages
-  - twine upload --skip-existing ~/pypi_packages/*
+  # - twine upload --skip-existing ~/pypi_packages/*
