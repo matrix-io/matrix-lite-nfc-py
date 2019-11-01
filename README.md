@@ -16,7 +16,7 @@ MATRIX Lite NFC Py is a package that allows users of varying skill levels to eas
 
 # Installation
 
-## 1.Install MATRIX HAL NFC
+## 1. Install MATRIX HAL NFC
 https://github.com/matrix-io/matrix-hal-nfc
 
 ## 2. Install Python 3
