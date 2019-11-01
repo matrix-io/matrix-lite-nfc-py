@@ -1,4 +1,9 @@
 
+### CURRENTLY NOT USED ###
+# Travis has been turned off because
+# the compile time for this > 50mins
+##########################
+
 language: python
 python:
 - '3.6'
