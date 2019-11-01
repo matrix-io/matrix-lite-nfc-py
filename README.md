@@ -15,7 +15,24 @@ MATRIX Lite NFC Py is a package that allows users of varying skill levels to eas
 - [ ] Docker deployment to PyPi
 
 # Installation
-1. Install [matrix-hal-nfc](https://github.com/matrix-io/matrix-hal-nfc) to use this library.
+
+## 1.Install MATRIX HAL NFC
+https://github.com/matrix-io/matrix-hal-nfc
+
+## 2. Install Python 3
+> To call your scripts with python 3, use `python3 YOUR_SCRIPT.py`
+```
+sudo apt-get install python3-pip
+```
+## 3. Upgrade PIP
+```
+python3 -m pip install --upgrade pip
+```
+
+## 4. Install matrix-lite-nfc-py
+```
+python3 -m pip install --user matrix-lite
+```
 
 # Reference
 
