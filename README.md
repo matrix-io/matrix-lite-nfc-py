@@ -155,3 +155,12 @@ Compile and install library.
 ```
 sudo python3 -m pip install ./matrix-lite-nfc-py
 ```
+
+Test your changes by importing any of the following libraries into a `.py` file.
+```py
+# Direct C++ bindings
+import _matrix_hal_nfc as hal_nfc
+
+# Abstractions to _matrix_hal_nfc
+import matrix_lite_nfc as nfc
+```
