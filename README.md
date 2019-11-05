@@ -1,5 +1,7 @@
 # MATRIX-Lite-NFC-Py
 
+![](https://github.com/matrix-io/matrix-lite-nfc-py/workflows/Compile%20Python%20Packages/badge.svg)
+
 MATRIX Lite NFC Py is a package that allows users of varying skill levels to easily program NFC with their MATRIX Creator.
 
 # Smartphone Apps For Debugging
