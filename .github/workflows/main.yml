@@ -1,10 +1,11 @@
 name: Compile Python Packages
 on:
-  create:
-  branches:
-    - master
-  tags:
-    - v*
+  push:
+    branches: 
+      - master
+    tags:
+      - v0.*
+      - v1.*
 
 jobs:
   build:
