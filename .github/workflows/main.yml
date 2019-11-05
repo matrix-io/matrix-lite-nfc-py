@@ -1,6 +1,6 @@
 name: Compile Python Packages
 on:
-  push:
+  create:
   branches:
     - master
   tags:
