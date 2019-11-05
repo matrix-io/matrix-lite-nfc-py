@@ -1,8 +1,6 @@
 name: Compile Python Packages
 on:
   push:
-    branches: 
-      - master
     tags:
       - v0.*
       - v1.*
@@ -41,4 +39,4 @@ jobs:
       run: |
         rm ~/pypi_packages/SW297940.zip
         sudo pip install twine
-        sudo twine upload --skip-existing ~/pypi_packages/*
+        sudo twine upload -u ${{ secrets.TWINE_USERNAME }} -p ${{ secrets.TWINE_PASSWORD }} --skip-existing ~/pypi_packages/*
