@@ -1,4 +1,4 @@
-name: Compile Python Packages
+name: PyPi Deployment
 on:
   push:
     tags:
@@ -35,8 +35,8 @@ jobs:
     - name: Compile armv7l Packages
       run: docker run -v ~/pypi_packages:/volume armv7l 
 
-    - name: Upload Packages To PyPi
+    - name: PyPi Deployment
       run: |
         rm ~/pypi_packages/SW297940.zip
-        sudo pip install twine
-        sudo twine upload -u ${{ secrets.TWINE_USERNAME }} -p ${{ secrets.TWINE_PASSWORD }} --skip-existing ~/pypi_packages/*
+        sudo python3 -m pip install --upgrade --no-cache-dir twine
+        sudo python3 -m twine upload -u ${{ secrets.TWINE_USERNAME }} -p ${{ secrets.TWINE_PASSWORD }} --skip-existing ~/pypi_packages/*
