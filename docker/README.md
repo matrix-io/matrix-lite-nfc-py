@@ -6,6 +6,6 @@ The armv6l & armv7l images are used to compile for different Raspberry Pi device
 Pushing a new tag with the format `v0.0.0` will trigger a build to compile/upload all the Python packages for matrix-lite-py.
 
 ```bash
-git tag v.0.0.0
+git tag v0.0.0
 git push origin --tags
 ```
