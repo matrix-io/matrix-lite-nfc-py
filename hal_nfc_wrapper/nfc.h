@@ -15,7 +15,7 @@ extern std::mutex nfc_usage;
 
 // Helpful functions for pybind11
 namespace pyHelp {
-	std::string to_lower_case(py::str);
+    std::string to_lower_case(py::str);
     std::map<std::string, pybind11::handle> dict_to_map(py::dict);
 }
 #endif
