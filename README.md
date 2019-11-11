@@ -20,7 +20,7 @@ MATRIX Lite NFC Py is a package that allows users of varying skill levels to eas
 ## 1. Install MATRIX HAL NFC
 https://github.com/matrix-io/matrix-hal-nfc
 
-## 2. Install Pip3
+## 2. Install PIP3
 > To call your scripts with python 3, use `python3 YOUR_SCRIPT.py`
 ```
 sudo apt-get install python3-pip
