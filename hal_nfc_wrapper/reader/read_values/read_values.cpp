@@ -54,6 +54,8 @@ void nfc_read_values(py::module &m) {
             else
                 print.append("ndef {}\n");
 
+            print.append("status: " + std::to_string(result.status)+"\n");
+
             return print+"}\n";
         }
     );
