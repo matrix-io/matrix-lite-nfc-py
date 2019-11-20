@@ -32,7 +32,7 @@ python3 -m pip install --upgrade pip
 
 ## 4. Install matrix-lite-nfc-py
 ```
-sudo python3 -m pip install --user matrix-lite
+sudo python3 -m pip install matrix-lite-nfc
 ```
 
 # Reference
