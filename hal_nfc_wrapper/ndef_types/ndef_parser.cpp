@@ -66,14 +66,8 @@ ndef_record ndef_parser::getRecord(int index) {
     // Create record data to return
     ndef_record result;
     result.tnf           = getTnf(&record);
-    std::cout << "C++ LOG:" << result.tnf << std::endl;
-
     result.type          = record.GetType();
-    std::cout << "C++ LOG:" << result.type << std::endl;
-
     result.payload       = record.GetPayload();
-    std::cout << "C++ LOG:" << result.payload << std::endl;
-
     result.byteSize      = record.GetEncodedSize();
     result.typeLength    = record.GetTypeLength();
     result.payloadLength = record.GetPayloadLength();
