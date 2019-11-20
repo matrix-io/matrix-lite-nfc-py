@@ -18,7 +18,7 @@ void record_data(py::module &m) {
         .def_readonly("IdLength", &ndef_record::IdLength)
         .def("__repr__", [](const ndef_record &r) {
             return
-            "tnf:"+              r.tnf+
+            "tnf: "+              r.tnf+
             "\ntype: "+          r.type+
             "\npayload: "+       r.payload+
             "\nbyteSize: "+      std::to_string(r.byteSize)+
