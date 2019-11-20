@@ -2,8 +2,12 @@
 #define NDEF_RECORD_H
 
 #include <pybind11/pybind11.h>
+#include "matrix_nfc/nfc.h"
+#include "matrix_nfc/nfc_data.h"
 
 namespace py = pybind11;
+
+std::string getTnf(matrix_hal::NDEFRecord *record);
 
 typedef struct ndef_record {
     std::string          tnf;
