@@ -36,7 +36,7 @@ void ndef_parser::addTextRecord(std::string text, std::string lang) {
 }
 
 void ndef_parser::addUriRecord(std::string text) {
-    parser.AddTextRecord(text);
+    parser.AddUriRecord(text);
 }
 
 void ndef_parser::addEmptyRecord() {
@@ -65,7 +65,7 @@ ndef_record ndef_parser::getRecord(int index) {
     
     // Create record data to return
     ndef_record result;
-    result.tnf           = record.GetTnf();
+    result.tnf           = getTnf(&record);
     result.type          = record.GetType();
     result.payload       = record.GetPayload();
     result.byteSize      = record.GetEncodedSize();
