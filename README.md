@@ -124,7 +124,7 @@ Writing to an NFC tag should normally be done inside the read loop.
 msg = nfc.Message()
 msg.addUriRecord("https://community.matrix.one")
 
-# Write and then Print status codes for activation & writing
+# Write and then print status codes for activation & writing
 print(nfc.write.message(msg))
 ```
 
